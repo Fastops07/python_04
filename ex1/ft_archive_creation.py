@@ -43,20 +43,26 @@ def main() -> None:
 
     print("---")
 
-    file_name: str = input("Enter new file name (or empty): ")
+    try:
+        file_name: str = input("Enter new file name (or empty): ").strip()
+    except KeyboardInterrupt:
+        print("\nOperation cancelled.")
+        return
+        
     if not file_name:
         print("Not saving data.")
     else:
         file_to_write: typing.IO[str] | None = None
         try:
+            print(f"Saving data to '{file_name}'")
             file_to_write = open(file_name, "w")
             file_to_write.write(transformed_content)
+            print(f"Data saved in file '{file_name}'.")
         except OSError as err:
             print(f"Error opening file '{file_name}': {err}")
         finally:
             if file_to_write is not None:
                 file_to_write.close()
-                print(f"File '{file_name}' closed.")
 
 
 if __name__ == "__main__":
