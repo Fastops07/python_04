@@ -4,7 +4,7 @@ import typing
 
 def main() -> None:
     if len(sys.argv) != 2:
-        print("Usage: ft_ancient_text.py <file>")
+        print("Usage: ft_archive_creation.py <file>")
         return
 
     print("=== Cyber Archives Recovery & Preservation ===")
@@ -16,35 +16,48 @@ def main() -> None:
     try:
         file = open(file_path, "r")
         content = file.read()
-        print("---\n\n")
+        print("---\n")
         print(content)
-        print("\n---")
+        print("---")
     except OSError as err:
         print(f"Error opening file '{file_path}': {err}")
     finally:
         if file is not None:
             file.close()
             print(f"File '{file_path}' closed.")
+            print()
 
     if content is None:
-        return 
+        return
 
     print("Transform data:")
     print("---")
     print()
 
-    transformed_data:list[str] = [line + "#" for line in content.splitlines()]
-    
-    for line in transformed_data:
-        print(line)
-        
-    print("\n---")
+    transformed_lines: list[str] = [
+        line + "#" for line in content.splitlines()
+    ]
+    transformed_content: str = "\n".join(transformed_lines)
+    transformed_content += "\n"
+    print(transformed_content)
 
-    file_name :str = input("Enter new file name (or empty): ")
-    if file_name:
+    print("---")
+
+    file_name: str = input("Enter new file name (or empty): ")
+    if not file_name:
         print("Not saving data.")
-    # else:
-        # try open write close 
+    else:
+        file_to_write: typing.IO[str] | None = None
+        try:
+            file_to_write = open(file_name, "w")
+            file_to_write.write(transformed_content)
+        except OSError as err:
+            print(f"Error opening file '{file_name}': {err}")
+        finally:
+            if file_to_write is not None:
+                file_to_write.close()
+                print(f"File '{file_name}' closed.")
+
+
 if __name__ == "__main__":
     main()
-
