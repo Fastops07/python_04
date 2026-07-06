@@ -15,7 +15,7 @@ def main() -> None:
     try:
         file = open(file_path, "r")
         content: str = file.read()
-        print("---\n\n")
+        print("---\n")
         print(content)
         print("\n---")
     except OSError as err:

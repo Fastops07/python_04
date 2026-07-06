@@ -18,7 +18,7 @@ def main() -> None:
         content = file.read()
         print("---\n")
         print(content)
-        print("---")
+        print("\n---")
     except OSError as err:
         print(f"Error opening file '{file_path}': {err}")
     finally:
@@ -30,18 +30,15 @@ def main() -> None:
     if content is None:
         return
 
-    print("Transform data:")
-    print("---")
-    print()
-
     transformed_lines: list[str] = [
         line + "#" for line in content.splitlines()
     ]
     transformed_content: str = "\n".join(transformed_lines)
-    transformed_content += "\n"
+    
+    print("Transform data:")
+    print("---\n")
     print(transformed_content)
-
-    print("---")
+    print("\n---")
 
     try:
         file_name: str = input("Enter new file name (or empty): ").strip()
