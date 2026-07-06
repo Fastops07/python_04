@@ -20,7 +20,7 @@ def main() -> None:
         print(content)
         print("\n---")
     except OSError as err:
-        print(f"Error opening file '{file_path}': {err}")
+        sys.stderr.write(f"[STDERR] Error opening file '{file_path}': {err}\n")
     finally:
         if file is not None:
             file.close()
@@ -34,7 +34,7 @@ def main() -> None:
         line + "#" for line in content.splitlines()
     ]
     transformed_content: str = "\n".join(transformed_lines)
-    
+
     print("Transform data:")
     print("---\n")
     print(transformed_content)
@@ -43,9 +43,9 @@ def main() -> None:
     try:
         file_name: str = input("Enter new file name (or empty): ").strip()
     except KeyboardInterrupt:
-        print("\nOperation cancelled.")
+        print("\nOperation cancelled.", file=sys.stderr)
         return
-        
+
     if not file_name:
         print("Not saving data.")
     else:
@@ -56,7 +56,7 @@ def main() -> None:
             file_to_write.write(transformed_content)
             print(f"Data saved in file '{file_name}'.")
         except OSError as err:
-            print(f"Error opening file '{file_name}': {err}")
+            print(f"Error opening file '{file_name}': {err}", file=sys.stderr)
         finally:
             if file_to_write is not None:
                 file_to_write.close()
