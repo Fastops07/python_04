@@ -34,7 +34,7 @@ def main() -> None:
         line + "#" for line in content.splitlines()
     ]
     transformed_content: str = "\n".join(transformed_lines)
-    
+
     print("Transform data:")
     print("---\n")
     print(transformed_content)
@@ -45,7 +45,7 @@ def main() -> None:
     except KeyboardInterrupt:
         print("\nOperation cancelled.")
         return
-        
+
     if not file_name:
         print("Not saving data.")
     else:

@@ -19,6 +19,7 @@ def secure_archive(
             return (False, str(err))
     return (False, "Invalid action")
 
+
 def main() -> None:
     print("=== Cyber Archives Security ===")
 

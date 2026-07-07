@@ -58,7 +58,9 @@ def main() -> None:
             file_to_write.write(transformed_content)
             print(f"Data saved in file '{file_name}'.")
         except OSError as err:
-            sys.stderr.write(f"[STDERR] Error opening file '{file_name}': {err}\n")
+            sys.stderr.write(
+                f"[STDERR] Error opening file '{file_name}': {err}\n"
+            )
             print("Data not saved.")
         finally:
             if file_to_write is not None:
